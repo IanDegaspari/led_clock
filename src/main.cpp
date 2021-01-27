@@ -124,6 +124,25 @@ struct colour time_based_colour(){
   return current_colour;
 }
 
+bool check_colour(int x){
+  return (x >= 0 && x <= 200);
+}
+
+void set_colour(int r, int g, int b){
+  bool check_r, check_g, check_b;
+  check_r = check_colour(r);
+  check_g = check_colour(g);
+  check_b = check_colour(b);
+
+  if (check_r && check_g && check_b){
+    for(int i = 0; i < NLEDS; i++)
+      leds[i] = CRGB(r, g, b);
+    
+    FastLED.show();
+  }
+  return;
+}
+
 void setup() {
   int count = 0;
   Serial.begin(9600);
