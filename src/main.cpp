@@ -6,7 +6,8 @@
 #include "structs.h"
 
 #define N 7
-#define NLEDS 60
+#define SEGMENT_SIZE 4
+#define DIGIT_SIZE 28
 
 const int ledPin =  25;      // the number of the LED pin
 const char* ssid       = "GG";
@@ -128,19 +129,40 @@ bool check_colour(int x){
   return (x >= 0 && x <= 200);
 }
 
-void set_colour(int r, int g, int b){
+void set_colour(int r, int g, int b, int start, int end){
   bool check_r, check_g, check_b;
   check_r = check_colour(r);
   check_g = check_colour(g);
   check_b = check_colour(b);
 
   if (check_r && check_g && check_b){
-    for(int i = 0; i < NLEDS; i++)
-      leds[i] = CRGB(r, g, b);
-    
-    FastLED.show();
+    if (end > 0){
+      for(int i = start; i < end; i++)
+        leds[i] = CRGB(r, g, b);
+    }
+    else{
+      leds[start] = CRGB(r, g, b);
+    }
+    //FastLED.show();
   }
   return;
+}
+
+void prepare_hour_leds(int hour){
+  String digit_1, digit_2;
+  int first_digit, second_digit;
+  digit_1 = String(hour)[0];
+  digit_2 = String(hour)[1];
+  first_digit = digit_1.toInt();
+  second_digit = digit_2.toInt();
+
+  for (int i = 0; i < 7 || segments[first_digit][i] != -1; i++){
+    set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+SEGMENT_SIZE);
+  }
+
+  for (int i = 0; i < 7 || segments[second_digit][i] != -1; i++){
+    set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE+SEGMENT_SIZE);
+  }
 }
 
 void setup() {
@@ -165,5 +187,13 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  //Check time
+  current_colour = time_based_colour();
+  prepare_hour_leds(timeinfo.tm_hour);
+
+  //Set hour LEDs
+
+  //Set minute LEDs
+
+  //Set second LEDs
 }
