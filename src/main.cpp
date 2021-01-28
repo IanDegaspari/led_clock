@@ -169,11 +169,11 @@ void prepare_hour_leds(int hour){
   first_digit = digit_1.toInt();
   second_digit = digit_2.toInt();
 
-  for (int i = 0; i < 7 || segments[first_digit][i] != -1; i++){
+  for (int i = 0; i < 7 && segments[first_digit][i] != -1; i++){
     set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+SEGMENT_SIZE);
   }
 
-  for (int i = 0; i < 7 || segments[second_digit][i] != -1; i++){
+  for (int i = 0; i < 7 && segments[second_digit][i] != -1; i++){
     set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE+SEGMENT_SIZE);
   }
 }
