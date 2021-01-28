@@ -25,7 +25,7 @@ WiFiClient espClient;
 //Variables
 struct tm timeinfo;
 struct colour current_colour;
-struct colour aux_colour;
+struct colour green, yellow, blue;
 int count = 0;
 int previous;
 long next_time_seconds, previous_time_seconds, total_seconds;
@@ -186,19 +186,17 @@ void prepare_minutes_leds(int min){
   int complete_leds, active_led;
   complete_leds = min/4;
   active_led = min%4;
-  set_colour(200, 0, 0, MINUTES_SIZE-complete_leds, MINUTES_SIZE); //TODO: Deixar um vermelho definido para os minutos, e não usar o valor direto na chamada da função
+  set_colour(current_colour.r, current_colour.g, current_colour.b, MINUTES_SIZE-complete_leds, MINUTES_SIZE); //TODO: Deixar um vermelho definido para os minutos, e não usar o valor direto na chamada da função
   switch(active_led){                                              //TODO: Definir essas outras 3 cores também numa struct
     case 1:
-      set_colour(200, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
+      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE-complete_leds-1, -1);
       break;
     case 2:
-      set_colour(0, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
+      set_colour(green.r, green.g, green.b, MINUTES_SIZE-complete_leds-1, -1);
       break;
     case 3:
-      set_colour(0, , 0, MINUTES_SIZE-complete_leds-1, -1);
+      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE-complete_leds-1, -1);
       break;
-    case 4:
-      set_colour()
   }
 }
 
@@ -206,24 +204,23 @@ void prepare_seconds_leds(int sec){
   int complete_leds, active_led;
   complete_leds = sec/4;
   active_led = sec%4;
-  set_colour(200, 0, 0, MINUTES_SIZE, MINUTES_SIZE+complete_leds);
+  set_colour(current_colour.r, current_colour.g, current_colour.b, MINUTES_SIZE, MINUTES_SIZE+complete_leds);
   switch (active_led){                                            //TODO: O mesmo que com os minutos
     case 1:
-      set_colour(0, 200, 0, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE+complete_leds+1, -1);
       break;
     case 2:
-      set_colour(200, 200, 0, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(green.r, green.g, green.b, MINUTES_SIZE+complete_leds+1, -1);
       break;
     case 3:
-      set_colour(200, 50, 0, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE+complete_leds+1, -1);
       break;
-    case 4:
-      set_colour()
   }
 }
 
 void setup() {
   Serial.begin(9600);
+
   
   //connect to WiFi
   Serial.printf("Connecting to %s ", ssid);
@@ -237,7 +234,18 @@ void setup() {
   //init and get the time
   configTime(gmtOffset_sec, 0, ntpServer);
   printLocalTime();
-  
+
+  //initializing colors
+  green.r = 0;
+  green.g = 200;
+  green.b = 0;
+  yellow.r = 200;
+  yellow.g = 200;
+  yellow.b = 0;
+  blue.r = 0;
+  blue.g = 0;
+  blue.b = 200;
+
   FastLED.addLeds<NEOPIXEL, ledPin>(leds, NLEDS);
   current_colour = time_based_colour();
 }
@@ -253,8 +261,4 @@ void loop() {
   prepare_minutes_leds(timeinfo.tm_min);
 
   //Set second LEDs
-  prepare_seconds_leds(timeinfo.tm_sec);
-
-  //Light the LEDs
-  FastLED.show();
 }
