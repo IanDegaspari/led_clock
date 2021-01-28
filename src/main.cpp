@@ -6,6 +6,7 @@
 #include "structs.h"
 
 #define N 7
+#define NLEDS 60
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
 
@@ -29,18 +30,6 @@ long next_time_seconds, previous_time_seconds, total_seconds;
 int diff_r, diff_g, diff_b;
 float percentage;
 int r, g, b;
-int segmentos[10][7];
-segmentos[0] = {0, 1, 2, 3, 4, 5, -1}
-segmentos[1] = {2, 3, -1}
-segmentos[2] = {1, 2, 4, 5, 6, -1}
-segmentos[3] = {1, 2, 3, 4, 6, -1}
-segmentos[4] = {0, 2, 3, 6, -1}
-segmentos[5] = {0, 1, 3, 4, 6, -1}
-segmentos[6] = {0, 1, 3, 4, 5, 6, -1}
-segmentos[7] = {1, 2, 3, -1}
-segmentos[8] = {0, 1, 2, 3, 4, 5, 6}
-segmentos[9] = {0, 1, 2, 3, 6, -1}
-
 
 void printLocalTime()
 {
@@ -161,6 +150,17 @@ void set_colour(int r, int g, int b, int start, int end){
 }
 
 void prepare_hour_leds(int hour){
+  int segments[10][7] =  {{0, 1, 2, 3, 4, 5, -1},
+                          {2, 3, -1},
+                          {1, 2, 4, 5, 6, -1},
+                          {1, 2, 3, 4, 6, -1},
+                          {0, 2, 3, 6, -1},
+                          {0, 1, 3, 4, 6, -1},
+                          {0, 1, 3, 4, 5, 6, -1},
+                          {1, 2, 3, -1},
+                          {0, 1, 2, 3, 4, 5, 6},
+                          {0, 1, 2, 3, 6, -1}};
+
   String digit_1, digit_2;
   int first_digit, second_digit;
   digit_1 = String(hour)[0];
