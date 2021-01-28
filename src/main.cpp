@@ -5,7 +5,7 @@
 #include "time.h"
 #include "structs.h"
 
-#define N 7
+#define N 8
 #define NLEDS 60
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
@@ -46,37 +46,40 @@ void printLocalTime()
 struct colour time_based_colour(){
   
   struct hour key_hours[N];
-  key_hours[0].h = 3;
-  key_hours[1].h = 8;
-  key_hours[2].h = 12;
-  key_hours[3].h = 16;
-  key_hours[3].m = 20;
-  key_hours[4].h = 18;
-  key_hours[5].h = 20;
-  key_hours[6].h = 22;
+  key_hours[0].h = 0;
+  key_hours[1].h = 3;
+  key_hours[2].h = 6;
+  key_hours[3].h = 9;
+  key_hours[4].m = 12;
+  key_hours[5].h = 15;
+  key_hours[6].h = 18;
+  key_hours[7].h = 21;
 
   struct colour key_colours[N];
-  key_colours[0].r = 0;
-  key_colours[0].g = 0;
-  key_colours[0].b = 255;
-  key_colours[1].r = 255;
-  key_colours[1].g = 0;
-  key_colours[1].b = 0;
-  key_colours[2].r = 3;   //3, 175, 255
-  key_colours[2].g = 175;
-  key_colours[2].b = 255;
-  key_colours[3].r = 0;
-  key_colours[3].g = 255;
+  key_colours[0].r = 0; //0, 10, 150 azul escuro
+  key_colours[0].g = 10;
+  key_colours[0].b = 150;
+  key_colours[1].r = 3; //3, 138, 43 verde escuro
+  key_colours[1].g = 138;
+  key_colours[1].b = 43;
+  key_colours[2].r = 200;   //200, 200, 0 amarelo
+  key_colours[2].g = 200;
+  key_colours[2].b = 0;
+  key_colours[3].r = 200;   //200, 82, 0 laranja
+  key_colours[3].g = 82;
   key_colours[3].b = 0;
-  key_colours[4].r = 255;
-  key_colours[4].g = 89;
+  key_colours[4].r = 200;   //200, 0, 0 vermelho
+  key_colours[4].g = 0;
   key_colours[4].b = 0;
-  key_colours[5].r = 255; //255, 3, 131
-  key_colours[5].g = 3;
-  key_colours[5].b = 131;
-  key_colours[6].r = 0;
-  key_colours[6].g = 99;
-  key_colours[6].b = 99;
+  key_colours[5].r = 200; //200, 82, 0 laranja
+  key_colours[5].g = 82;
+  key_colours[5].b = 0;
+  key_colours[6].r = 10;  //10, 199, 23 verde claro
+  key_colours[6].g = 199;
+  key_colours[6].b = 23;
+  key_colours[7].r = 4;   //4, 118, 199 azul claro
+  key_colours[7].g = 118;
+  key_colours[7].b = 199;
 
   struct colour current_colour;
 
@@ -186,14 +189,16 @@ void prepare_minutes_leds(int min){
   set_colour(200, 0, 0, MINUTES_SIZE-complete_leds, MINUTES_SIZE); //TODO: Deixar um vermelho definido para os minutos, e não usar o valor direto na chamada da função
   switch(active_led){                                              //TODO: Definir essas outras 3 cores também numa struct
     case 1:
-      set_colour(0, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
-      break;
-    case 2:
       set_colour(200, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
       break;
-    case 3:
-      set_colour(200, 50, 0, MINUTES_SIZE-complete_leds-1, -1);
+    case 2:
+      set_colour(0, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
       break;
+    case 3:
+      set_colour(0, , 0, MINUTES_SIZE-complete_leds-1, -1);
+      break;
+    case 4:
+      set_colour()
   }
 }
 
@@ -212,6 +217,8 @@ void prepare_seconds_leds(int sec){
     case 3:
       set_colour(200, 50, 0, MINUTES_SIZE+complete_leds+1, -1);
       break;
+    case 4:
+      set_colour()
   }
 }
 
