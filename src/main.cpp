@@ -9,6 +9,7 @@
 #define NLEDS 60
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
+#define MINUTES_SIZE 70
 
 const int ledPin =  25;      // the number of the LED pin
 const char* ssid       = "GG";
@@ -177,8 +178,25 @@ void prepare_hour_leds(int hour){
   }
 }
 
+void prepare_minutes_leds(int min){
+  int complete_leds, active_led;
+  complete_leds = min/4;
+  active_led = min%4;
+  set_colour(200, 0, 0, MINUTES_SIZE-complete_leds, MINUTES_SIZE); //TODO: Deixar um vermelho definido para os minutos, e não usar o valor direto na cahmada da função
+  switch(active_led){                                              //TODO: Definir essas outras 3 cores também numa struct
+    case 1:
+      set_colour(0, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
+      break;
+    case 2:
+      set_colour(200, 200, 0, MINUTES_SIZE-complete_leds-1, -1);
+      break;
+    case 3:
+      set_colour(200, 50, 0, MINUTES_SIZE-complete_leds-1, -1);
+      break;
+  }
+}
+
 void setup() {
-  int count = 0;
   Serial.begin(9600);
   
   //connect to WiFi
@@ -201,11 +219,12 @@ void setup() {
 void loop() {
   //Check time
   current_colour = time_based_colour();
-  prepare_hour_leds(timeinfo.tm_hour);
 
   //Set hour LEDs
+  prepare_hour_leds(timeinfo.tm_hour);
 
   //Set minute LEDs
+  prepare_minutes_leds(timeinfo.tm_min);
 
   //Set second LEDs
 }
