@@ -141,7 +141,7 @@ void prepare_hour_leds(int hour){
   }
 
   for (int i = 0; i < 7 && segments[second_digit][i] != -1; i++){
-    set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+DIGIT_SIZE+SEGMENT_SIZE);
+    set_colour(current_colour.r, current_colour.g, current_colour.b, segments[second_digit][i]*SEGMENT_SIZE+DIGIT_SIZE, segments[second_digit][i]*SEGMENT_SIZE+DIGIT_SIZE+SEGMENT_SIZE);
   }
 }
 
@@ -244,22 +244,31 @@ void setup() {
   blue.b = 200;
 
   FastLED.addLeds<NEOPIXEL, ledPin>(leds, NLEDS);
-  current_colour = time_based_colour();
+}
+
+void clear_leds(){
+  set_colour(0, 0, 0, 0, NLEDS);
 }
 
 void loop() {
-  //Check time
+  //Atualiza a hora
   current_colour = time_based_colour();
 
-  //Set hour LEDs
+  //Limpa os LEDs
+  clear_leds();
+
+  //Prepara LEDs das horas
   prepare_hour_leds(timeinfo.tm_hour);
 
-  //Set minute LEDs
+  //Prepara LEDs dos minutos
   prepare_minutes_leds(timeinfo.tm_min);
 
-  //Set second LEDs
+  //Prepara LEDs dos segundos
   prepare_seconds_leds(timeinfo.tm_sec);
 
-  //Light LEDs
+  //Acende os LEDs
   FastLED.show();
+  
+  //Um segundinho...
+  delay(1000);
 }
