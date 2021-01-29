@@ -258,4 +258,8 @@ void loop() {
   prepare_minutes_leds(timeinfo.tm_min);
 
   //Set second LEDs
+  prepare_seconds_leds(timeinfo.tm_sec);
+
+  //Light LEDs
+  FastLED.show();
 }
