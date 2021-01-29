@@ -247,19 +247,34 @@ void setup() {
   current_colour = time_based_colour();
 }
 
+void clear_leds(){
+  set_colour(0, 0, 0, 0, NLEDS);
+}
+
 void loop() {
   //Check time
   current_colour = time_based_colour();
 
-  //Set hour LEDs
-  prepare_hour_leds(timeinfo.tm_hour);
+  //Clear LEDs
+  clear_leds();
 
-  //Set minute LEDs
-  prepare_minutes_leds(timeinfo.tm_min);
+  // //Set hour LEDs
+  // prepare_hour_leds(timeinfo.tm_hour);
 
-  //Set second LEDs
-  prepare_seconds_leds(timeinfo.tm_sec);
+  // //Set minute LEDs
+  // prepare_minutes_leds(timeinfo.tm_min);
 
-  //Light LEDs
-  FastLED.show();
+  // //Set second LEDs
+  // prepare_seconds_leds(timeinfo.tm_sec);
+
+  // //Light LEDs
+  // FastLED.show();
+  String h;
+  for (int i = 0; i < 10; i++){
+    for (int j = 0; j < 10; j++){
+      h = String(i) + String(j);
+      prepare_hour_leds(h.toInt());
+      delay(1000);
+    }
+  }
 }
