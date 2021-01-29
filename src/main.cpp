@@ -261,11 +261,11 @@ void loop() {
   // //Set hour LEDs
   // prepare_hour_leds(timeinfo.tm_hour);
 
-  // //Set minute LEDs
-  // prepare_minutes_leds(timeinfo.tm_min);
+  //Set minute LEDs
+  prepare_minutes_leds(timeinfo.tm_min);
 
-  // //Set second LEDs
-  // prepare_seconds_leds(timeinfo.tm_sec);
+  //Set second LEDs
+  prepare_seconds_leds(timeinfo.tm_sec);
 
   // //Light LEDs
   // FastLED.show();
