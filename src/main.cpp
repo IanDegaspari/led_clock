@@ -12,9 +12,9 @@
 #define MINUTES_SIZE 71
 #define SECONDS_SIZE 86
 
-const int ledPin =  25;      // the number of the LED pin
-const char* ssid       = "GG";
-const char* password   = "maisfacil";
+const int ledPin =  4;      // the number of the LED pin
+const char* ssid       = "Dalva 2.4";
+const char* password   = "carlosbaum";
 
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = -3*3600;
@@ -170,13 +170,13 @@ void prepare_seconds_leds(int sec){
   set_colour(current_colour.r, current_colour.g, current_colour.b, MINUTES_SIZE, MINUTES_SIZE+complete_leds);
   switch (active_led){                                            
     case 1:
-      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE+complete_leds, -1);
       break;
     case 2:
-      set_colour(green.r, green.g, green.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(green.r, green.g, green.b, MINUTES_SIZE+complete_leds, -1);
       break;
     case 3:
-      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE+complete_leds, -1);
       break;
   }
 }
@@ -251,24 +251,24 @@ void clear_leds(){
 }
 
 void loop() {
-  //Atualiza a hora
+  //Get time
   current_colour = time_based_colour();
 
-  //Limpa os LEDs
+  //Clear LEDs
   clear_leds();
 
-  //Prepara LEDs das horas
+  //Set hour LEDs
   prepare_hour_leds(timeinfo.tm_hour);
 
-  //Prepara LEDs dos minutos
+  //Set minutes LEDs
   prepare_minutes_leds(timeinfo.tm_min);
 
-  //Prepara LEDs dos segundos
+  //Set seconds LEDs
   prepare_seconds_leds(timeinfo.tm_sec);
 
-  //Acende os LEDs
+  //Light the LEDs
   FastLED.show();
   
-  //Um segundinho...
+  //Just a sec...
   delay(1000);
 }
