@@ -1,5 +1,5 @@
 # Relógio com LED
-### Dev's: Andre Ribeiro, Carlos Trevisan, Felipe Bis, Ian Degaspari
+Dev's: Andre Ribeiro, Carlos Trevisan, Felipe Bis, Ian Degaspari
 
 ## Descrição
 
