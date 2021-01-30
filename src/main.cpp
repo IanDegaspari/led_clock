@@ -6,15 +6,15 @@
 #include "structs.h"
 
 #define N 8
-#define NLEDS 60
+#define NLEDS 86
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
 #define MINUTES_SIZE 71
 #define SECONDS_SIZE 86
 
-const int ledPin =  25;      // the number of the LED pin
-const char* ssid       = "GG";
-const char* password   = "maisfacil";
+const int ledPin =  4;      // the number of the LED pin
+const char* ssid       = "Dalva 2.4";
+const char* password   = "carlosbaum";
 
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = -3*3600;
@@ -131,10 +131,16 @@ void prepare_hour_leds(int hour){
 
   String digit_1, digit_2;
   int first_digit, second_digit;
-  digit_1 = String(hour)[0];
-  digit_2 = String(hour)[1];
-  first_digit = digit_1.toInt();
-  second_digit = digit_2.toInt();
+  if (hour < 10){
+    first_digit = 0;
+    second_digit = hour;
+  }
+  else{
+    digit_1 = String(hour)[0];
+    digit_2 = String(hour)[1];
+    first_digit = digit_1.toInt();
+    second_digit = digit_2.toInt();
+  }
 
   for (int i = 0; i < 7 && segments[first_digit][i] != -1; i++){
     set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+SEGMENT_SIZE);
@@ -170,13 +176,13 @@ void prepare_seconds_leds(int sec){
   set_colour(current_colour.r, current_colour.g, current_colour.b, MINUTES_SIZE, MINUTES_SIZE+complete_leds);
   switch (active_led){                                            
     case 1:
-      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(yellow.r, yellow.g, yellow.b, MINUTES_SIZE+complete_leds, -1);
       break;
     case 2:
-      set_colour(green.r, green.g, green.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(green.r, green.g, green.b, MINUTES_SIZE+complete_leds, -1);
       break;
     case 3:
-      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE+complete_leds+1, -1);
+      set_colour(blue.r, blue.g, blue.b, MINUTES_SIZE+complete_leds, -1);
       break;
   }
 }
@@ -269,12 +275,10 @@ void loop() {
 
   // //Light LEDs
   // FastLED.show();
-  String h;
-  for (int i = 0; i < 10; i++){
-    for (int j = 0; j < 10; j++){
-      h = String(i) + String(j);
-      prepare_hour_leds(h.toInt());
-      delay(1000);
-    }
+  for (int i = 0; i < 100; i++){
+    clear_leds();
+    prepare_hour_leds(i);
+    FastLED.show();
+    delay(1000);
   }
 }
