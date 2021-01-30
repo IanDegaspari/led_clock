@@ -1,11 +1,11 @@
-# Relógio com LED
-Dev's: Andre Ribeiro, Carlos Trevisan, Felipe Bis, Ian Degaspari
+<h1><strong>Relógio com LED</strong></h1>
+<strong>Dev's: Andre Ribeiro, Carlos Trevisan, Felipe Bis, Ian Degaspari</strong>
 
-## Descrição
+<h2><strong>Descrição</strong></h2>
 
 Um relógio com 86 leds, onde as cores são baseadas no horário durante o dia.
 
-## Funcionamento
+<h2><strong>Funcionamento</strong></h2>
 
 A comunicação com os leds é feita a partir de um ESP32. Utiliza-se o ESP32 para se conectar com a internt e poder capturar a hora, minutos, e segundos em tempo real com base no WI-FI.
 
