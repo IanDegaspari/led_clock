@@ -6,7 +6,7 @@
 #include "structs.h"
 
 #define N 8
-#define NLEDS 60
+#define NLEDS 86
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
 #define MINUTES_SIZE 71
@@ -131,10 +131,16 @@ void prepare_hour_leds(int hour){
 
   String digit_1, digit_2;
   int first_digit, second_digit;
-  digit_1 = String(hour)[0];
-  digit_2 = String(hour)[1];
-  first_digit = digit_1.toInt();
-  second_digit = digit_2.toInt();
+  if (hour < 10){
+    first_digit = 0;
+    second_digit = hour;
+  }
+  else{
+    digit_1 = String(hour)[0];
+    digit_2 = String(hour)[1];
+    first_digit = digit_1.toInt();
+    second_digit = digit_2.toInt();
+  }
 
   for (int i = 0; i < 7 && segments[first_digit][i] != -1; i++){
     set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+SEGMENT_SIZE);
