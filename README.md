@@ -16,3 +16,7 @@ O Relógio possui 86 leds onde a representação da hora e dos minutos é feita 
 Já os minutos e segundos são representados por duas fileiras de 15 leds, portando, cada led representa 4 minutos, com isso é feito um esquema de cores para representar os 4 minutos completo, se o do minutos, ou segundo estiver da cor da hora, esse minuto/segundo está completo totalizando 4 minutos, caso contrário, ele representa 1, 2, ou 3 mintuos/segundos.
 
 Ao longo do dia a cor do relógio vai mudando, a noite a paleta de cor se aproxima do azul/roxo, onde 00h temos o roxo, durante o dia as cores se aproximam do amarelo/vermelho, onde o vermelho estará presente as 12h.
+
+Videos:
+
+![alt text](https://github.com/IanDegaspari/led_clock/tree/main/videos/demonstração1.mp4)
