@@ -19,4 +19,4 @@ Ao longo do dia a cor do relógio vai mudando, a noite a paleta de cor se aproxi
 
 Videos:
 
-![](demonstração1.gif)
+![](https://github.com/IanDegaspari/led_clock/tree/main/videos/demonstração1.gif)
