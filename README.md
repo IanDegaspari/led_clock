@@ -20,7 +20,5 @@ Ao longo do dia a cor do relógio vai mudando, a noite a paleta de cor se aproxi
 Videos:
 
 ![alt text](videos/demonstracao1.gif)
-![alt text](videos/demonstracao2.gif)
-![alt text](videos/demonstracao3.gif)
 ![alt text](videos/demonstracao4.gif)
 ![alt text](videos/demonstracao5.gif)
