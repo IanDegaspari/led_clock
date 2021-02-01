@@ -6,7 +6,7 @@
 #include "structs.h"
 
 #define N 8
-#define NLEDS 60
+#define NLEDS 86
 #define SEGMENT_SIZE 4
 #define DIGIT_SIZE 28
 #define MINUTES_SIZE 71
@@ -131,10 +131,16 @@ void prepare_hour_leds(int hour){
 
   String digit_1, digit_2;
   int first_digit, second_digit;
-  digit_1 = String(hour)[0];
-  digit_2 = String(hour)[1];
-  first_digit = digit_1.toInt();
-  second_digit = digit_2.toInt();
+  if (hour < 10){
+    first_digit = 0;
+    second_digit = hour;
+  }
+  else{
+    digit_1 = String(hour)[0];
+    digit_2 = String(hour)[1];
+    first_digit = digit_1.toInt();
+    second_digit = digit_2.toInt();
+  }
 
   for (int i = 0; i < 7 && segments[first_digit][i] != -1; i++){
     set_colour(current_colour.r, current_colour.g, current_colour.b, segments[first_digit][i]*SEGMENT_SIZE, segments[first_digit][i]*SEGMENT_SIZE+SEGMENT_SIZE);
@@ -210,38 +216,38 @@ void setup() {
 
   //initialise colours
   key_colours[0].r = 0; //0, 10, 150 dark blue
-  key_colours[0].g = 10;
-  key_colours[0].b = 150;
-  key_colours[1].r = 3; //3, 138, 43 dark green
-  key_colours[1].g = 138;
-  key_colours[1].b = 43;
-  key_colours[2].r = 200;   //200, 200, 0 yellow
-  key_colours[2].g = 200;
+  key_colours[0].g = 0;
+  key_colours[0].b = 30;
+  key_colours[1].r = 50; //3, 138, 43 purple
+  key_colours[1].g = 50;
+  key_colours[1].b = 0;
+  key_colours[2].r = 70;   //70, 70, 0 yellow
+  key_colours[2].g = 70;
   key_colours[2].b = 0;
-  key_colours[3].r = 200;   //200, 82, 0 orange
-  key_colours[3].g = 82;
+  key_colours[3].r = 100;   //200, 82, 0 orange
+  key_colours[3].g = 41;
   key_colours[3].b = 0;
-  key_colours[4].r = 200;   //200, 0, 0 red
+  key_colours[4].r = 100;   //200, 0, 0 red
   key_colours[4].g = 0;
   key_colours[4].b = 0;
-  key_colours[5].r = 200; //200, 82, 0 orange
-  key_colours[5].g = 82;
+  key_colours[5].r = 100; //200, 82, 0 orange
+  key_colours[5].g = 41;
   key_colours[5].b = 0;
-  key_colours[6].r = 10;  //10, 199, 23 light green
-  key_colours[6].g = 199;
-  key_colours[6].b = 23;
+  key_colours[6].r = 0;  //10, 199, 23 light green
+  key_colours[6].g = 50;
+  key_colours[6].b = 0;
   key_colours[7].r = 4;   //4, 118, 199 light blue
-  key_colours[7].g = 118;
-  key_colours[7].b = 199;
+  key_colours[7].g = 30;
+  key_colours[7].b = 100;
   green.r = 0;
-  green.g = 200;
+  green.g = 50;
   green.b = 0;
-  yellow.r = 200;
-  yellow.g = 200;
+  yellow.r = 50;
+  yellow.g = 50;
   yellow.b = 0;
   blue.r = 0;
   blue.g = 0;
-  blue.b = 200;
+  blue.b = 50;
 
   FastLED.addLeds<NEOPIXEL, ledPin>(leds, NLEDS);
 }
