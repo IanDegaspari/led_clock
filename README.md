@@ -11,7 +11,7 @@ A comunicação com os leds é feita a partir de um ESP32. Utiliza-se o ESP32 pa
 
 O Relógio possui 86 leds onde a representação da hora é feita com fileiras de 4 leds formando dois digitos, conforme a imagem abaixo:
 
-![alt text](https://cdn.discordapp.com/attachments/459524958452973590/803775160854380564/gugu.png)
+![alt text](https://github.com/IanDegaspari/led_clock/blob/main/connections.png)
 
 Já os minutos e segundos são representados por duas fileiras de 15 leds, portando, cada led representa 4 minutos, com isso é feito um esquema de cores para representar os 4 minutos completo, se o do minutos, ou segundo estiver da cor da hora, esse minuto/segundo está completo totalizando 4 minutos, caso contrário, ele representa 1, 2, ou 3 mintuos/segundos.
 
