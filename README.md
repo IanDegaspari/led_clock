@@ -9,7 +9,7 @@ Um relógio com 86 leds, onde as cores são baseadas no horário durante o dia.
 
 A comunicação com os leds é feita a partir de um ESP32. Utiliza-se o ESP32 para se conectar com a internt e poder capturar a hora, minutos, e segundos em tempo real com base no WI-FI.
 
-O Relógio possui 86 leds onde a representação da hora e dos minutos é feita com fileiras de 4 leds formando dois digitos, conforme a imagem abaixo:
+O Relógio possui 86 leds onde a representação da hora é feita com fileiras de 4 leds formando dois digitos, conforme a imagem abaixo:
 
 ![alt text](https://cdn.discordapp.com/attachments/459524958452973590/803775160854380564/gugu.png)
 
